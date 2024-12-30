@@ -1,4 +1,4 @@
-# mini-project-sims_4-
+# mini-project-sims_4
 ## 프로젝트 기획
 
 프로젝트 배경
