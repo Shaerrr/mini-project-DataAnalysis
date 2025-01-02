@@ -74,7 +74,5 @@ Free to Play 전환 효과
 - SteamDB: https://steamdb.info/
 - Welcome to Steam
 - The Steam Winter Sale is on now — find great deals on thousands of games! Plus vote for the finalists in the 2024 Steam Awards.
-- Welcome to Steam
-- SteamDB:  https://store.steampowered.com/
-- SteamDB : https://steamdb.info/
+
 
