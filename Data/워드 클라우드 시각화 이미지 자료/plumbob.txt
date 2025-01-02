@@ -1,0 +1,110 @@
+# plumbob
+
+import pandas as pd
+import numpy as np
+from collections import Counter
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+import nltk
+from nltk.tokenize import RegexpTokenizer
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from PIL import Image
+import string
+import warnings
+import matplotlib.font_manager as fm
+warnings.filterwarnings('ignore')
+
+# matplotlib에 한글 폰트 설정
+
+plt.rcParams['font.family'] = 'Moneygraphy-Pixel'
+
+# Download required NLTK data
+
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet', quiet=True)
+
+# Read the data
+
+df = pd.read_csv('data/dlc별 리뷰 데이터.csv', encoding='utf-8')
+
+# Initialize tools
+
+tokenizer = RegexpTokenizer(r'\w+')
+lemmatizer = WordNetLemmatizer()
+
+# Get stop words
+
+stop_words = set(stopwords.words('english'))
+custom_stop_words = {
+'sim', 'pack', 'sims', 'game', 'dlc', 'play', 'playing', 'played', 'games', 'like', 'good', 'great',
+'just', 'really', 'would', 'well', 'get', 'got', 'much', 'make', 'made',
+'one', 'bit', 'even', 'still', 'thing', 'think', 'way', 'lot', 'pack',
+'want', 'need', 'feel', 'see', 'look', 'try', 'use', 'time', 'fun',
+'can', 'will', 'add', 'also', 'new', 'content'
+}
+stop_words.update(custom_stop_words)
+
+# Process all reviews
+
+print("Processing all reviews...")
+all_words = []
+for text in df['Review']:
+if isinstance(text, str):
+tokens = tokenizer.tokenize(text.lower())
+tokens = [token for token in tokens if token not in stop_words
+and not token.isnumeric()
+and len(token) > 2
+and token.isalpha()]
+tokens = [lemmatizer.lemmatize(token) for token in tokens]
+all_words.extend(tokens)
+
+# Calculate word frequencies
+
+word_count = Counter(all_words)
+
+# Print statistics
+
+print(f"\n전체 리뷰 수: {len(df)}")
+print(f"총 단어 수: {len(all_words)}")
+print(f"고유 단어 수: {len(word_count)}")
+
+# Print top words
+
+print("\nTop 30 most common words across all DLCs:")
+for word, count in word_count.most_common(30):
+print(f"{word}: {count}")
+
+# Load and process mask image
+
+mask_img = Image.open('plumbob.png')
+mask = np.array(mask_img)
+
+# Create and configure wordcloud
+
+wc = WordCloud(
+font_path='C:/Users/user/AppData/Local/Microsoft/Windows/Fonts/Moneygraphy-Pixel.otf',
+background_color='black',
+width=1200,  # 크기를 더 크게 설정
+height=900,
+max_words=150,
+mask=mask,
+colormap='Greens',
+collocations=False
+)
+
+# Generate wordcloud
+
+wc.generate_from_frequencies(word_count)
+
+# Create figure
+
+plt.figure(figsize=(20, 15))  # 더 큰 크기로 표시
+plt.imshow(wc, interpolation='bilinear')
+plt.axis('off')
+plt.title('Word Cloud - All DLCs Combined', color='white', pad=20, fontsize=20, fontfamily='Moneygraphy-Pixel')
+plt.gca().set_facecolor('black')
+plt.gcf().set_facecolor('black')
+plt.show()
+
+print("\n워드클라우드 생성이 완료되었습니다.")
