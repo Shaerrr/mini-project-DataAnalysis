@@ -1,6 +1,6 @@
 # 데이터로 바라본 DLC의 영향력과 방향
 ## 프로젝트 개요
-기간: 2024.12.16 ~ 2024.12.30
+기간: 2024.12.16 ~ 2024.12.30   
 발표 PDF:  
 ◆ 팀원 및 역할
 - 김형후: 스팀 리뷰 데이터 크롤링, dlc 평가지표 제작, 자연어 전처리 및 정규화, 매출 순위 데이터 수집
@@ -43,7 +43,7 @@ Free to Play 전환 효과
 - 전환 전: 평균 2만 5천명 
 - 전환 후: 평균 4만 5천명
 
-## 활용 방안 및 제언
+## 활용 방안 및 제안
 ◆ DLC 개발 전략
 - 가격 정책과 안정성 우선 고려
 - 정기적 콘텐츠 업데이트 필요
@@ -74,7 +74,5 @@ Free to Play 전환 효과
 - SteamDB: https://steamdb.info/
 - Welcome to Steam
 - The Steam Winter Sale is on now — find great deals on thousands of games! Plus vote for the finalists in the 2024 Steam Awards.
-- Welcome to Steam
-- SteamDB:  https://store.steampowered.com/
-- SteamDB : https://steamdb.info/
+
 
